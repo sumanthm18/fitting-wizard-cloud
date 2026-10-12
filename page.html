@@ -174,6 +174,7 @@ section.soft{background:var(--soft)}
 .rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;margin-top:clamp(40px,6vw,72px);padding-top:32px;border-top:1px solid var(--line)}
 .rules div{display:flex;flex-direction:column;gap:6px;min-width:0}
 .rules p{color:var(--muted);font-size:1rem}
+.rules.flat{margin-top:0;padding-top:0;border-top:0}
 @media (max-width:900px){.agent{grid-template-columns:1fr}.rules{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:480px){.rules{grid-template-columns:1fr}.night li{grid-template-columns:50px minmax(0,1fr)}.night .tag{grid-column:2;justify-self:start}}
 
@@ -271,7 +272,7 @@ footer a{color:var(--ink)}
     <nav aria-label="Sections">
       <a href="#asked">What's new</a>
       <a href="#bill">No server bill</a>
-      <a href="#assistant">The assistant</a>
+      <a href="#reception">AI receptionist</a>
       <a href="#connects">Connections</a>
       <a href="#faq">Questions</a>
     </nav>
@@ -410,7 +411,7 @@ footer a{color:var(--ink)}
         <div class="agent-copy">
           <span class="label">The assistant</span>
           <h2>Agentic means it does the work, not just the talking.</h2>
-          <p class="lede">It works inside the same diary and rules as your staff, on your website, SMS, WhatsApp and Facebook. Your team sees everything in the morning.</p>
+          <p class="lede">It works inside the same diary and rules as your staff, on your phone line, website, SMS, WhatsApp and Facebook. Your team sees everything in the morning.</p>
           <ul class="does">
             <li><svg class="i"><use href="#i-check"/></svg><span><b>Answers after hours.</b> <span>Families often look for hearing help in the evening, once you have closed.</span></span></li>
             <li><svg class="i"><use href="#i-check"/></svg><span><b>Books, moves and confirms.</b> <span>Straight into the diary, with the right clinician and funding type.</span></span></li>
@@ -440,6 +441,23 @@ footer a{color:var(--ink)}
     </div>
   </section>
 
+  <section class="block" id="reception">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">AI receptionist</span>
+        <h2>Your phone and your ads, answered and booked.</h2>
+        <p class="lede">An AI receptionist picks up calls and enquiries around the clock and books them straight into your diary, without anyone at the clinic touching a button.</p>
+      </div>
+      <div class="rules flat">
+        <div><h3>Answers the phone, 24/7</h3><p>After hours, or during the day when your lines are busy. It books, reschedules, cancels and answers common questions.</p></div>
+        <div><h3>Meta and Google Ads</h3><p>Link your ads directly. Every enquiry they bring in is answered and booked into the diary.</p></div>
+        <div><h3>WhatsApp Business</h3><p>Clients message or voice call your clinic's WhatsApp number at any hour and get a booking.</p></div>
+        <div><h3>Follow-up that keeps going</h3><p>Leads who don't book are nurtured, and dormant clients are invited back.</p></div>
+      </div>
+      <p class="aside">Scaffold is an official Meta Business Solution Provider, which makes Fitting Wizard Cloud one of the few practice management systems linked directly to Meta.</p>
+    </div>
+  </section>
+
   <section class="block soft" id="connects">
     <div class="wrap">
       <div class="sec-head">
@@ -452,9 +470,9 @@ footer a{color:var(--ink)}
           <h3>Accounts</h3>
           <ul class="chips"><li>Xero</li><li>MYOB</li><li>QuickBooks</li></ul>
           <h3>Messages and bookings</h3>
-          <ul class="chips"><li>SMS</li><li>Email</li><li>WhatsApp</li><li>Facebook Messenger</li><li>Instagram</li><li>Your website</li><li>Google reviews</li></ul>
+          <ul class="chips"><li>Phone</li><li>SMS</li><li>Email</li><li>WhatsApp Business</li><li>Facebook Messenger</li><li>Instagram</li><li>Your website</li><li>Google reviews</li></ul>
           <h3>Marketing and referrals</h3>
-          <ul class="chips"><li>GoHighLevel</li><li>GP and ENT referral portal</li></ul>
+          <ul class="chips"><li>Meta Ads</li><li>Google Ads</li><li>GoHighLevel</li><li>GP and ENT referral portal</li></ul>
           <h3>AI assistants</h3>
           <ul class="chips"><li class="ai">Claude</li><li class="ai">ChatGPT</li><li class="ai">Gemini</li></ul>
         </div>
@@ -594,6 +612,9 @@ footer a{color:var(--ink)}
               <input type="checkbox" name="wants" id="w5" value="Paperless forms"><label for="w5">Paperless forms</label>
               <input type="checkbox" name="wants" id="w6" value="Lower hosting cost"><label for="w6">Lower hosting cost</label>
               <input type="checkbox" name="wants" id="w7" value="AI assistant"><label for="w7">AI assistant</label>
+              <input type="checkbox" name="wants" id="w9" value="AI phone receptionist"><label for="w9">AI phone receptionist</label>
+              <input type="checkbox" name="wants" id="w10" value="Ads booked into the diary"><label for="w10">Meta or Google Ads booked into the diary</label>
+              <input type="checkbox" name="wants" id="w11" value="WhatsApp Business"><label for="w11">WhatsApp Business</label>
               <input type="checkbox" name="wants" id="w8" value="Better reports"><label for="w8">Better reports</label>
             </div>
           </fieldset>
@@ -626,6 +647,7 @@ footer a{color:var(--ink)}
         <details><summary>Do we still need a server or remote desktop?</summary><p>No. Fitting Wizard Cloud runs in a web browser, so there is no server to rent or look after and no remote desktop to log in to. Hosting is part of the one bill.</p></details>
         <details><summary>Can we use it with Claude, ChatGPT or Gemini?</summary><p>Yes. It has MCP built in, the standard way AI assistants connect to software. You choose what each assistant can see and do, every request is logged, and client records stay in Fitting Wizard Cloud.</p></details>
         <details><summary>Where is our data kept?</summary><p>In Australia. Each clinic's data is kept separate from every other clinic's, every view and change is recorded in a log you can read, and you can export everything at any time.</p></details>
+        <details><summary>Can it answer our phone and our ads?</summary><p>Yes. An AI receptionist can take calls 24/7 or only when your lines are busy, and can book, reschedule, cancel and answer common questions. Meta Ads, Google Ads and WhatsApp Business link directly, so enquiries are booked into your diary and followed up.</p></details>
         <details><summary>Do we have to use the AI assistant?</summary><p>No. It is optional and switched on per clinic. When it is on, your team can read every conversation and take over at any point.</p></details>
         <details><summary>What happens to HSP work?</summary><p>Vouchers, renewals and claim preparation are part of the core product, as they are in Fitting Wizard today.</p></details>
         <details><summary>Is Francois still involved?</summary><p>Yes. Fitting Wizard Cloud is built by Scaffold in partnership with Francois Capmeil of Biotronic, and his support continues.</p></details>
@@ -648,7 +670,7 @@ footer a{color:var(--ink)}
 /* ===== Settings ===== */
 const CONFIG = {
   // Google Sheet link: paste the Apps Script web app URL (ends in /exec) between the quotes.
-  endpoint: "",
+  endpoint: "https://script.google.com/macros/s/AKfycbyhShBsgVsd0gjh2FrPUgDK8QF7MFJqYFzoWi5s4xnfMeqD-iR2yXbPW88SO9778Jqy/exec",
   source: "waitlist-page"
 };
 
