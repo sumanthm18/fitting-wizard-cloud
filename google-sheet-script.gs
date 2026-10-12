@@ -9,6 +9,9 @@
  * 4. Copy the web app URL (ends in /exec) and paste it into CONFIG.endpoint in the page.
  */
 
+// The "Fitting Wizard Cloud Waitlist" sheet. Used if this script was not opened from inside the sheet.
+const SHEET_ID = '1lKlRHQvU0c4p58l-5mSSnyZ1aFPpqAXKgXGoNxmOXb8';
+
 // Column header -> field sent by the page. Order here is the column order in the sheet.
 const FIELDS = [
   ['Submitted at', 'submitted_at'],
@@ -39,7 +42,8 @@ function doPost(e) {
     if (data.website) return reply({ ok: true }); // hidden field only bots fill in
     if (!data.email || !data.clinic) return reply({ ok: false, error: 'missing fields' });
 
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+    const book = SpreadsheetApp.getActiveSpreadsheet() || SpreadsheetApp.openById(SHEET_ID);
+    const sheet = book.getSheets()[0];
     if (sheet.getLastRow() === 0) sheet.appendRow(FIELDS.map(f => f[0]));
 
     sheet.appendRow(FIELDS.map(([, key]) => {

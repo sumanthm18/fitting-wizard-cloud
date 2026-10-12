@@ -796,13 +796,14 @@ form.addEventListener("submit", async (ev)=>{
   if(!preview){
     let sent=false;
     try{
-      // text/plain + no-cors is what a Google Apps Script web app accepts from a browser.
-      await fetch(CONFIG.endpoint,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
-      sent=true;
+      // text/plain keeps this a simple request, which a Google Apps Script web app accepts from a browser.
+      const r=await fetch(CONFIG.endpoint,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+      const out=await r.json();
+      sent=!!(out && out.ok);
     }catch(e){ sent=false; }
     if(!sent){
       submitBtn.disabled=false; submitBtn.textContent="Join the waitlist";
-      statusEl.textContent="That didn't go through. Please check your internet connection and press Join the waitlist again.";
+      statusEl.textContent="That didn't go through. Please press Join the waitlist again in a moment.";
       statusEl.hidden=false; return;
     }
     try{ if(window.fbq) fbq("track","Lead"); if(window.gtag) gtag("event","generate_lead"); }catch(e){}
