@@ -214,6 +214,7 @@ form.card{background:var(--bg);border:1px solid var(--line);border-radius:22px;p
 .err{color:var(--danger);font-size:.9rem}
 .err:empty{display:none}
 fieldset{border:0;margin:0;padding:0;min-width:0}
+#other-box{margin-top:14px}
 .seg{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;position:relative}
 .seg input{position:absolute;left:0;top:0;opacity:0;pointer-events:none;width:1px;height:1px;min-height:0;padding:0;margin:0;border:0}
 .seg label{font-weight:400;font-size:1rem;padding:.6rem 1rem;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;transition:border-color .15s,background .15s,color .15s;user-select:none;min-height:46px;display:inline-flex;align-items:center}
@@ -597,7 +598,6 @@ footer a{color:var(--ink)}
             <legend>Where does Fitting Wizard run today?</legend>
             <div class="seg">
               <input type="radio" name="hosting" id="h1" value="Habitat 3"><label for="h1">Habitat 3 (remote desktop)</label>
-              <input type="radio" name="hosting" id="h2" value="Carbonell"><label for="h2">Carbonell</label>
               <input type="radio" name="hosting" id="h3" value="Server in clinic"><label for="h3">A server in our clinic</label>
               <input type="radio" name="hosting" id="h4" value="Other provider"><label for="h4">Another provider</label>
               <input type="radio" name="hosting" id="h5" value="Not sure"><label for="h5">Not sure</label>
@@ -618,7 +618,9 @@ footer a{color:var(--ink)}
               <input type="checkbox" name="wants" id="w10" value="Ads booked into the diary"><label for="w10">Meta or Google Ads booked into the diary</label>
               <input type="checkbox" name="wants" id="w11" value="WhatsApp Business"><label for="w11">WhatsApp Business</label>
               <input type="checkbox" name="wants" id="w8" value="Better reports"><label for="w8">Better reports</label>
+              <input type="checkbox" name="wants" id="w12" value="Other" aria-controls="other-box"><label for="w12">Other</label>
             </div>
+            <div class="field" id="other-box" hidden><label for="other">What else would help?</label><input id="other" name="other" maxlength="300" autocomplete="off"></div>
           </fieldset>
 
           <label class="check" for="pilot"><input type="checkbox" id="pilot" name="pilot" checked><span>We'd like to be considered for the free pilot.</span></label>
@@ -767,6 +769,9 @@ function onScroll(){
 window.addEventListener("scroll", onScroll, {passive:true});
 
 /* ===== Waitlist form ===== */
+const otherChk=document.getElementById("w12"), otherBox=document.getElementById("other-box"), otherIn=document.getElementById("other");
+function syncOther(focus){ otherBox.hidden=!otherChk.checked; if(otherChk.checked && focus) otherIn.focus(); }
+otherChk.addEventListener("change", ()=>syncOther(true)); syncOther(false);
 const form=document.getElementById("waitlist"), statusEl=document.getElementById("status"), submitBtn=document.getElementById("submit");
 function setErr(id,msg){ const el=document.getElementById(id), e=document.getElementById(id+"-err"); if(el) el.setAttribute("aria-invalid", msg?"true":"false"); if(e) e.textContent=msg||""; }
 function params(){
@@ -788,7 +793,9 @@ form.addEventListener("submit", async (ev)=>{
 
   const payload = {
     name:v("name"), role:v("role"), clinic:v("clinic"), state:v("state"), email:v("email"), phone:v("phone"),
-    clinicians:v("clinicians"), sites:v("sites"), hosting:v("hosting"), wants:fd.getAll("wants"),
+    clinicians:v("clinicians"), sites:v("sites"), hosting:v("hosting"),
+    // The typed "Other" answer travels in the same list, so it lands in the sheet's "Wants most" column.
+    wants:fd.getAll("wants").map(w => (w==="Other" && v("other")) ? "Other: "+v("other") : w),
     pilot: document.getElementById("pilot").checked, website:v("website"), source:CONFIG.source,
     page: (location && location.href) || "", ...params()
   };
